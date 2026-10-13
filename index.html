@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ITI EV — 3D Purple MCQs</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      background: #0b0a1a;
+      background-image: radial-gradient(circle at 15% 30%, #2e1b4e 0%, #0b0a1a 70%);
+      min-height: 100vh;
+      padding: 24px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #ede9fe;
+    }
+
+    /* main glass container */
+    .app-wrapper {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    /* HEADER — floating 3D effect */
+    .header {
+      text-align: center;
+      padding: 32px 20px;
+      background: linear-gradient(145deg, #1e1535, #0f0b1f);
+      border-radius: 48px 48px 32px 32px;
+      box-shadow: 
+        0 25px 40px -12px #00000080,
+        inset 0 1px 3px #ffffff1a,
+        0 0 0 1px #6b21a880;
+      margin-bottom: 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 80% 20%, #a855f740, transparent 70%);
+      pointer-events: none;
+    }
+
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #f0e7ff, #c4a5ff, #b07cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px #a855f760;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 1rem;
+      color: #baa7e6;
+      background: #2a1b44b0;
+      display: inline-block;
+      padding: 8px 26px;
+      border-radius: 100px;
+      backdrop-filter: blur(6px);
+      box-shadow: inset 0 1px 2px #ffffff1a, 0 8px 18px -8px #000000;
+      font-weight: 500;
+    }
+
+    /* set buttons — unique pill / hover 3D */
+    .set-bar {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 32px;
+      padding: 0 8px;
+    }
+
+    .set-btn {
+      flex: 1;
+      min-width: 150px;
+      padding: 18px 18px;
+      border: none;
+      border-radius: 60px;
+      background: #18122b;
+      box-shadow: 
+        0 12px 22px -10px #000000b0,
+        inset 0 1px 0 #ffffff1a,
+        0 0 0 1px #3f2e66;
+      color: #b9a6f0;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
+      position: relative;
+    }
+
+    .set-btn:hover {
+      transform: translateY(-6px) scale(1.02);
+      background: #241b3d;
+      box-shadow: 
+        0 24px 32px -12px #a855f780,
+        inset 0 1px 0 #ffffff2a,
+        0 0 0 1px #a78bfa;
+      color: #f0e7ff;
+    }
+
+    .set-btn.active {
+      background: linear-gradient(145deg, #7e22ce, #a855f7);
+      color: white;
+      box-shadow: 
+        0 0 0 2px #c084fc,
+        0 18px 30px -10px #a855f7b0,
+        inset 0 1px 6px #ffffff80;
+      transform: scale(1.02);
+    }
+
+    /* search */
+    .search-wrap {
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: center;
+      padding: 0 6px;
+    }
+
+    .search-wrap input {
+      width: 100%;
+      max-width: 600px;
+      padding: 16px 28px;
+      border-radius: 60px;
+      border: none;
+      background: #130f22;
+      box-shadow: 
+        inset 0 6px 10px #00000080,
+        0 0 0 1px #3e2d60,
+        0 8px 18px -10px #000000;
+      color: #eee6ff;
+      font-size: 1rem;
+      font-weight: 400;
+      outline: none;
+      caret-color: #c084fc;
+    }
+
+    .search-wrap input::placeholder {
+      color: #8b7aa8;
+      font-weight: 400;
+    }
+
+    .search-wrap input:focus {
+      box-shadow: 
+        inset 0 4px 8px #000000b0,
+        0 0 0 2px #a855f7,
+        0 8px 18px -10px #a855f780;
+      background: #1a132b;
+    }
+
+    /* section titles – purple glass */
+    .section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 48px 0 22px;
+      padding: 18px 28px;
+      border-radius: 40px 12px 40px 12px;
+      background: #1e1535e0;
+      backdrop-filter: blur(4px);
+      box-shadow: 
+        0 0 0 1px #7e22ce60,
+        0 12px 26px -12px #000000,
+        inset 0 1px 0 #ffffff1a;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #d8c2ff;
+      letter-spacing: -0.01em;
+      border-left: 8px solid #a855f7;
+    }
+
+    .section-title.ev {
+      border-left-color: #c084fc;
+    }
+
+    .section-title.emp {
+      border-left-color: #a78bfa;
+    }
+
+    /* CARD — hidden answer, click to show purple */
+    .card {
+      background: #161027;
+      border-radius: 28px;
+      padding: 26px 28px;
+      margin-bottom: 20px;
+      box-shadow: 
+        0 20px 35px -18px #000000,
+        0 0 0 1px #3e2d60,
+        inset 0 1px 1px #ffffff0d;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1);
+      border-left: 6px solid #6d28d9;
+      animation: cardGlow 0.4s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.01) translateY(-4px);
+      box-shadow: 
+        0 30px 45px -15px #000000,
+        0 0 0 2px #a855f7a0,
+        0 0 28px -8px #a855f7;
+      background: #1f1836;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      background: radial-gradient(circle at 20% 10%, #a855f718, transparent 60%);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    /* question number purple chip */
+    .q-num {
+      display: inline-block;
+      background: #2a1b4a;
+      color: #c7a7ff;
+      padding: 4px 16px;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 14px;
+      box-shadow: inset 0 1px 4px #00000080, 0 0 0 1px #7e22ce50;
+    }
+
+    .question {
+      font-size: 1.22rem;
+      font-weight: 600;
+      line-height: 1.6;
+      color: #f0e7ff;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 6px #00000060;
+      word-break: break-word;
+    }
+
+    /* ANSWER — HIDDEN by default, click to reveal in PURPLE */
+    .answer {
+      background: transparent;
+      border: none;
+      border-radius: 20px;
+      padding: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.6;
+      color: transparent;
+      text-shadow: none;
+      transition: all 0.25s ease;
+      user-select: none;
+      pointer-events: none;
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      margin-top: 0;
+      transform: translateY(-6px);
+    }
+
+    /* when card is clicked / answer revealed */
+    .card.revealed .answer {
+      background: #2c1b4e;
+      border: 1px solid #b073ff;
+      box-shadow: 
+        0 0 0 2px #7e22ce60,
+        0 10px 20px -12px #a855f7,
+        inset 0 1px 8px #00000060;
+      color: #e9d5ff;
+      padding: 16px 22px;
+      opacity: 1;
+      max-height: 200px;
+      margin-top: 16px;
+      transform: translateY(0);
+      pointer-events: auto;
+      text-shadow: 0 0 8px #c084fc60;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+
+    /* small hint icon */
+    .card .hint {
+      display: inline-block;
+      margin-left: 12px;
+      color: #a78bfa;
+      font-size: 0.85rem;
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    .card.revealed .hint {
+      display: none;
+    }
+
+    /* footer */
+    .footer {
+      text-align: center;
+      margin-top: 65px;
+      padding: 28px 20px;
+      color: #7e6a9e;
+      font-size: 0.9rem;
+      border-top: 1px solid #2a1b44;
+      letter-spacing: 0.3px;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 70px 20px;
+      background: #130f22;
+      border-radius: 48px;
+      color: #bba7e6;
+      font-size: 1.2rem;
+      box-shadow: inset 0 0 0 1px #4c2a80;
+    }
+
+    /* animation */
+    @keyframes cardGlow {
+      0% { opacity: 0; transform: translateY(18px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* scrollbar */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b0a1a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #6d28d9;
+      border-radius: 20px;
+      border: 2px solid #0b0a1a;
+    }
+
+    /* mobile */
+    @media (max-width: 600px) {
+      .header h1 { font-size: 1.8rem; }
+      .header p { font-size: 0.85rem; padding: 6px 18px; }
+      .set-btn { font-size: 1rem; padding: 14px; min-width: 100%; }
+      .question { font-size: 1.08rem; }
+      .card { padding: 20px 18px; }
+      .section-title { font-size: 1.3rem; padding: 14px 20px; }
+    }
+  </style>
+</head>
+<body>
+<div class="app-wrapper">
+  <!-- header -->
+  <div class="header">
+    <h1>⚡ ITI  — MCQs</h1>
+    
+  </div>
+
+  <!-- set selector -->
+  <div class="set-bar">
+    <button class="set-btn active" id="setBtn1" onclick="selectSet('set1')">📘 Set 1</button>
+    <button class="set-btn" id="setBtn2" onclick="selectSet('set2')">📗 Set 2</button>
+    <button class="set-btn" id="setBtn3" onclick="selectSet('set3')">📙 Set 3</button>
+  </div>
+
+  <!-- search -->
+  <div class="search-wrap">
+    <input type="text" id="search" placeholder="🔍 खोजें (question / answer) ...">
+  </div>
+
+  <!-- content dynamic -->
+  <div id="content"></div>
+
+  <!-- footer -->
+  <div class="footer">
+    ✦ click on any card → answer appears in <span style="color:#c084fc;font-weight:700;">purple</span> ✦
+  </div>
+</div>
+
+<script>
+  // ============================================================
+  // SET 1 (same data, but trimmed for readability – full data preserved)
+  // ============================================================
+  const set1 = [
+    {q:"इंडक्शन मोटर किस प्रकार की मोटर है?", a:"AC मोटर", t:"ev"},
+    {q:"उद्योगों में किस प्रकार की इंडक्शन मोटर का सबसे ज्यादा उपयोग होता है?", a:"3 फेज गिलहरी पिंजरा मोटर", t:"ev"},
+    {q:"इंडक्शन मोटर को किस नाम से जाना जाता है?", a:"अतुल्यकालिक मोटर", t:"ev"},
+    {q:"3 फेज इंडक्शन मोटर का नुकसान क्या है?", a:"खराब स्टार्टिंग टॉर्क", t:"ev"},
+    {q:"मोटर को ठंडा करने के लिए किस द्रव का उपयोग होता है?", a:"एथाइलीन ग्लाइकॉल", t:"ev"},
+    {q:"मोटर कूलिंग सिस्टम में TEFC क्या है?", a:"पूरी तरह से बंद पंखा ठंडा (Totally Enclosed Fan Cooled)", t:"ev"},
+    {q:"एयर कूलिंग सिस्टम में मोटर को ठंडा करने के लिए किसका उपयोग होता है?", a:"पंखा", t:"ev"},
+    {q:"मोटर को ज्यादा गर्म होने से बचाने के लिए क्या करना चाहिए?", a:"मोटर को ठंडा करना", t:"ev"},
+    {q:"मोटर की गति कंट्रोल करने के लिए सबसे ज्यादा कौन सी विधि उपयोग होती है?", a:"वोल्टेज नियंत्रण विधि", t:"ev"},
+    {q:"PWM का फुल फॉर्म क्या है?", a:"पल्स विड्थ मॉड्यूलेशन", t:"ev"},
+    {q:"VFD का फुल फॉर्म क्या है?", a:"वेरिएबल फ्रीक्वेंसी ड्राइव", t:"ev"},
+    {q:"DC मोटर की स्पीड कंट्रोल विधि कौन सी है?", a:"आर्मेचर नियंत्रण तकनीक", t:"ev"},
+    {q:"अगर स्टेटर और रोटर के बीच का एयर गैप कम हो जाए तो क्या होता है?", a:"विद्युत असंतुलन होता है", t:"ev"},
+    {q:"मोटर के सुस्त चलने का कारण क्या है?", a:"सप्लाई वोल्टेज बहुत कम होना", t:"ev"},
+    {q:"मोटर चालू करते ही फ्यूज उड़ने का कारण क्या है?", a:"शॉर्ट सर्किट होना", t:"ev"},
+    {q:"मोटर में शोर का कारण क्या है?", a:"रोटर का स्टेटर से रगड़ना", t:"ev"},
+    {q:"मोटर नियंत्रण का उपयोग किस लिए किया जाता है?", a:"गति नियंत्रण के लिए", t:"ev"},
+    {q:"नियंत्रण के दो बुनियादी प्रकार कौन से हैं?", a:"इलेक्ट्रॉनिक्स और इलेक्ट्रोमैकेनिकल यूनिट", t:"ev"},
+    {q:"मोटर नियंत्रण में DSP क्या है?", a:"डिजिटल सिग्नल प्रोसेसर", t:"ev"},
+    {q:"Multi Axis Controller का उपयोग क्या है?", a:"गति के अलग-अलग भागों को नियंत्रित और मॉनिटर करने के लिए", t:"ev"},
+    {q:"मोटर नियंत्रण में रीजनरेटिव ड्राइव का उपयोग क्या है?", a:"शीतलन प्रणाली", t:"ev"},
+    {q:"IMU का फुल फॉर्म क्या है?", a:"इनर्शियल मेजरमेंट यूनिट", t:"ev"},
+    {q:"ACC का फुल फॉर्म क्या है?", a:"एडेप्टिव क्रूज कंट्रोल", t:"ev"},
+    {q:"जब कार का टायर चिकनी पक्की सड़क पर हो तो रोलिंग रेजिस्टेंस कितना होता है?", a:"0.01", t:"ev"},
+    {q:"Gradient Resistance Force का फॉर्मूला क्या है?", a:"Fg = mg sin θ", t:"ev"},
+    {q:"Hybrid Electric वाहन में किस प्रकार के सेल का उपयोग होता है?", a:"पाउच या प्रिज्मेटिक सेल", t:"ev"},
+    {q:"हाइब्रिड वाहन में भविष्य में किस सेल का उपयोग ज्यादा होगा?", a:"शेली या बेलनाकार कोशिका", t:"ev"},
+    {q:"कौन सी कोशिका बेलनाकार से 30-100 गुना बड़ी होती है?", a:"प्रिज्मीय कोशिकाएं", t:"ev"},
+    {q:"बैटरी के दो इलेक्ट्रोड कौन से होते हैं?", a:"एनोड और कैथोड", t:"ev"},
+    {q:"बैटरी का उपयोग क्या करने के लिए किया जाता है?", a:"विद्युत ऊर्जा उत्पन्न करने के लिए", t:"ev"},
+    {q:"इलेक्ट्रिक वाहन में किस प्रकार के सेल का उपयोग होता है?", a:"बेलनाकार, पाउच और प्रिज्मेटिक", t:"ev"},
+    {q:"विश्व की सबसे बड़ी बैटरी कंपनी कौन सी है?", a:"CATL", t:"ev"},
+    {q:"कोशिकाओं में कैथोड की परत किस धातु की होती है?", a:"एल्युमिनियम", t:"ev"},
+    {q:"सेल में एनोड की परत किस धातु की होती है?", a:"तांबा (Copper)", t:"ev"},
+    {q:"चार्ज-डिस्चार्ज वक्र क्या बताता है?", a:"बैटरी का वोल्टेज और क्षमता", t:"ev"},
+    {q:"चार्ज-डिस्चार्ज कर्व के दो महत्वपूर्ण अक्ष कौन से हैं?", a:"वोल्टेज और समय", t:"ev"},
+    {q:"CC और CV क्या है?", a:"कांस्टेंट करंट और कांस्टेंट वोल्टेज", t:"ev"},
+    {q:"लिथियम-आयन सेल को किस तापमान में चार्ज किया जा सकता है?", a:"0°C से 60°C", t:"ev"},
+    {q:"फिजिक्स / वर्कशॉप — घर्षण बल, सेंटर ऑफ ग्रेविटी, लुब्रिकेंट का काम क्या है?", a:"लुब्रिकेंट का काम घर्षण कम करना है", t:"ev"},
+    {q:"दो सामान्य प्रकार के टायर कौन से हैं?", a:"ट्यूब टाइप और ट्यूबलेस", t:"ev"},
+    {q:"12 Volt बैटरी में कितने सेल होते हैं?", a:"6 सेल", t:"ev"},
+    {q:"इंजन सिलेंडर के अंदर पैदा होने वाली शक्ति को क्या कहते हैं?", a:"इंडिकेटेड पावर", t:"ev"},
+    {q:"बैटरी का निशान क्या दर्शाता है?", a:"बैटरी चेतावनी", t:"ev"},
+    {q:"फ्यूल मीटर E पर होने का क्या मतलब है?", a:"कम ईंधन", t:"ev"},
+    {q:"ट्रायंगल का निशान क्या दर्शाता है?", a:"हेजार्ड लाइट", t:"ev"},
+    // emp part
+    {q:"नौकरी पाने के लिए जरूरी स्किल कौन सी है?", a:"इंटरव्यू स्किल", t:"emp"},
+    {q:"नौकरी के लिए पहली तैयारी क्या है?", a:"रिज्यूम बनाना", t:"emp"},
+    {q:"कैंपस भर्ती में क्या आयोजित होती है?", a:"ITI", t:"emp"},
+    {q:"बायोडाटा में कौन सी जानकारी कम जरूरी है?", a:"Expected Salary", t:"emp"},
+    {q:"लोगों से अच्छी तरह जुड़ने की क्षमता को क्या कहते हैं?", a:"Interpersonal Skill", t:"emp"},
+    {q:"प्रतीक्षा और शांत रहने की क्षमता को क्या कहते हैं?", a:"धैर्य (Patience)", t:"emp"},
+    {q:"समय की पाबंदी का अर्थ क्या है?", a:"समय पर होना", t:"emp"},
+    {q:"सहपाठी से पेन मांगना — सही वाक्य कौन सा है?", a:"Can you please give me a pen.", t:"emp"},
+    {q:"Magnificent, Sharp — ये किस प्रकार के शब्द हैं?", a:"Describing Words (विशेषण)", t:"emp"},
+    {q:"Table, wire, hammer — ये किस प्रकार के शब्द हैं?", a:"Naming Words (संज्ञा)", t:"emp"},
+    {q:"Comma, Full Stop — ये क्या हैं?", a:"Punctuation Marks", t:"emp"},
+    {q:"चर्चा शुरू करने के लिए क्या कहेंगे?", a:"आइए चर्चा करें", t:"emp"},
+    {q:"बॉस से बात करते समय कैसे रहना चाहिए?", a:"Formal (औपचारिक)", t:"emp"},
+    {q:"अनुरोध वाला पत्र किस प्रकार का Communication है?", a:"Formal Communication", t:"emp"},
+    {q:"इशारे, चेहरे के भाव किस प्रकार का Communication है?", a:"Non-Verbal Communication", t:"emp"},
+    {q:"नमस्ते आप कैसे हैं — यह किस प्रकार का Communication है?", a:"Informal Communication", t:"emp"},
+    {q:"मेरे शहर की सड़कें ... हैं — सही शब्द क्या है?", a:"Good (अच्छी)", t:"emp"},
+    {q:"There is a beautiful garden with lovely flowers.", a:"beautiful, lovely", t:"emp"},
+    {q:"There is a big playground near our house.", a:"big", t:"emp"},
+    {q:"There are spacious apartments in my neighbourhood.", a:"spacious", t:"emp"},
+    {q:"The Principal called Manoj. The Principal asked ___ to show ___ hall ticket for the CTS Examination.", a:"him, his", t:"emp"},
+    {q:"Tell us about a difficult situation you have ___ and how you ___ to come out of it.", a:"faced, managed", t:"emp"},
+    {q:"There is a factory in the area. The air is ___.", a:"Polluted", t:"emp"},
+    {q:"There is water scarcity in the locality. The area is ___.", a:"Dry", t:"emp"},
+    {q:"The transportation to some rural area is ___ as the roads are uneven.", a:"Difficult", t:"emp"}
+  ];
+
+  // ============================================================
+  // SET 2
+  // ============================================================
+  const set2 = [
+    {q:"Electric Vehicle में उपयोग किए जाने वाले तीन मूल प्रकार की बैटरी सेल क्या हैं?", a:"बेलनाकार कोशिकाएं, पाउच कोशिकाएं, प्रिज्मीय कोशिकाएं", t:"ev"},
+    {q:"LCO का Full Form क्या है?", a:"Lithium Cobalt Oxide", t:"ev"},
+    {q:"Lithium-ion कोशिकाओं का सबसे आम रसायन क्या है?", a:"Lithium Ferric Phosphate", t:"ev"},
+    {q:"थैली कोशिकाओं (Pouch Cells) का मुख्य नुकसान क्या है?", a:"सेल निर्माण के लिए अधिक महंगा हो सकता है", t:"ev"},
+    {q:"कई अनुप्रयोगों में आम-तौर पर किस बैटरी Configuration का उपयोग होता है?", a:"Circular Configuration", t:"ev"},
+    {q:"बैटरी का वोल्टेज बढ़ाने के लिए बैटरियों को जोड़ना क्या कहलाता है?", a:"Series Connection", t:"ev"},
+    {q:"बैटरी की Amp-घंटे क्षमता बढ़ाने के लिए बैटरियों को जोड़ना क्या कहलाता है?", a:"Parallel Connection", t:"ev"},
+    {q:"बैटरी को श्रृंखला या समानांतर में जोड़ने से पहले क्या करना चाहिए?", a:"कनेक्शन का एक योजनाबद्ध आरेख बनाएं", t:"ev"},
+    {q:"BMS का Full Form क्या है?", a:"Battery Management System", t:"ev"},
+    {q:"BMS की तीन Topology कौन-सी हैं?", a:"केन्द्रीकृत, वितरित, माड्यूलर", t:"ev"},
+    {q:"बैटरी प्रबंधन प्रणाली (BMS) की परिभाषा क्या है?", a:"Rechargeable बैटरी के Charging और Discharging की निगरानी और नियंत्रण करने वाला इलेक्ट्रॉनिक नियामक", t:"ev"},
+    {q:"बैटरी प्रबंधन प्रणाली का नुकसान क्या है?", a:"Current Measurements error", t:"ev"},
+    {q:"SLA का Full Form क्या है?", a:"Sealed Lead Acid Battery", t:"ev"},
+    {q:"DOD का Full Form क्या है?", a:"Depth of Discharge", t:"ev"},
+    {q:"किस बैटरी में उच्च शक्ति घनत्व (Power Density) होता है?", a:"Lithium ion Battery", t:"ev"},
+    {q:"Lithium ion बैटरी का आवेश चक्र (Charge Cycle) कितना होता है?", a:"300 - 500", t:"ev"},
+    {q:"SOC का Full Form क्या है?", a:"State of Charge", t:"ev"},
+    {q:"SOH का Full Form क्या है?", a:"State of Health", t:"ev"},
+    {q:"चार्ज की स्थिति (State of Charge) की परिभाषा क्या है?", a:"यह एक इलेक्ट्रिक बैटरी के आवेश का स्तर है", t:"ev"},
+    {q:"EV में बैटरी पैक के लिए State of Charge (SOC) किसके बराबर है?", a:"Fuel gauge / ईंधन गेज", t:"ev"},
+    {q:"SOP का Full Form क्या है?", a:"State of Power", t:"ev"},
+    {q:"BMS में कौन सा अनुमान बहुत महत्वपूर्ण भूमिका निभाता है?", a:"State of Power", t:"ev"},
+    {q:"SOE का Full Form क्या है?", a:"State of Energy", t:"ev"},
+    {q:"EV क्षेत्र में संग्रहित ऊर्जा के लिए किन बैटरियों का व्यापक उपयोग होता है?", a:"Lithium-ion-batteries", t:"ev"},
+    {q:"बैटरियों को कहाँ नहीं रखना चाहिए?", a:"Direct Sunlight", t:"ev"},
+    {q:"बैटरी चार्जर को किससे सुरक्षित करना चाहिए?", a:"पानी से", t:"ev"},
+    {q:"EV में उपसाधन बदलने या समायोजन करने से पहले क्या करना चाहिए?", a:"बैटरी को डिस्कनेक्ट करें", t:"ev"},
+    {q:"बैटरी प्रबंधन में मुख्य सुरक्षा सावधानी क्या है?", a:"बैटरी के साथ कभी संशोधित/डिसेबल/टेम्पर्ड न करें", t:"ev"},
+    {q:"आम ज़रिया बैटरी का वोल्टेज क्या है?", a:"9V", t:"ev"},
+    {q:"पर्यावरण वन और जलवायु परिवर्तन मंत्रालय ने बैटरी अपशिष्ट प्रबंधन कब प्रकाशित किया?", a:"2022", t:"ev"},
+    {q:"2022 में बैटरी अपशिष्ट प्रबंधन नियमों को किसने अधिसूचित किया?", a:"नरेन्द्र मोदी", t:"ev"},
+    {q:"CPCB का Full Form क्या है?", a:"Central Pollution Control Board", t:"ev"},
+    {q:"BTMS का Full Form क्या है?", a:"Battery Thermal Management System", t:"ev"},
+    {q:"तरल शीतलन प्रणाली में शीतलन माध्यम के रूप में क्या प्रयोग होता है?", a:"Water & Glycol Mixture", t:"ev"},
+    {q:"पंखे से हवा प्रचलित करके ठंडा करने वाली प्रणाली क्या कहलाती है?", a:"Forced Air Cooling", t:"ev"},
+    {q:"तरल शीतलन प्रणाली में कौन शामिल नहीं है?", a:"Fan / पंखा", t:"ev"},
+    {q:"Fast-Charging के दौरान किस Component को ज्यादा Cooling चाहिए?", a:"On Board Charger", t:"ev"},
+    {q:"इलेक्ट्रिक रिक्शा की BLDC मोटर में कौन सी शीतलन प्रणाली होती है?", a:"Forced Air Cooling", t:"ev"},
+    {q:"एक वृत्त के गुरुत्वाकर्षण का केंद्र कहाँ स्थित है?", a:"इसके केंद्र में / At its Center", t:"ev"},
+    {q:"किस ज्यामितीय आकृति का गुरुत्वाकर्षण केंद्र आधार से उचाई 1/3 पर है?", a:"त्रिभुज", t:"ev"},
+    {q:"यदि 13 + x = 20 है तो x का मान क्या है?", a:"7", t:"ev"},
+    {q:"a^m × a^n का फार्मूला क्या है?", a:"a^(m+n)", t:"ev"},
+    {q:"(a^m)^n किसके बराबर है?", a:"a^(mn)", t:"ev"},
+    {q:"(a+b)^2 का विस्तारित रूप क्या है?", a:"a² + 2ab + b²", t:"ev"},
+    {q:"[Diagram of Drum] — यह क्या है?", a:"ड्रम ब्रेक / Drum Brake", t:"ev"},
+    {q:"[Diagram of Spark Plug] — यह क्या है?", a:"Spark Plug", t:"ev"},
+    {q:"अंतर टॉर्क और गति प्राप्त करने के लिए किस भाग का उपयोग होता है?", a:"गियर बॉक्स", t:"ev"},
+    {q:"विद्युत तार बनाने के लिए किस धातु का उपयोग होता है?", a:"ताँबा", t:"ev"},
+    {q:"कार की बैटरी किस प्रकार का करंट उत्पन्न करती है?", a:"DC - Direct Current", t:"ev"},
+    {q:"Live wire से Connect करने के लिए कौन-सा उपकरण प्रतिबंधित है?", a:"Ohmmeter", t:"ev"},
+    {q:"मानसिक और शारीरिक गतिविधियों के बीच संतुलन बनाए रखने में कौन मदद करता है?", a:"Hobbies", t:"emp"},
+    {q:"अच्छी Biodata के लिए किन महत्वपूर्ण कारकों की जांच करनी चाहिए?", a:"वर्तनी, व्याकरण संबंधी गलतियों से मुक्त सही जानकारी", t:"emp"},
+    {q:"Role models inspire people to follow them — वर्णात्मक शब्द कौन सा है?", a:"Inspire", t:"emp"},
+    {q:"किसी स्थान की परिस्थितियाँ जो व्यक्ति/वस्तु के व्यवहार और विकास को प्रभावित करती हैं, कहलाती हैं?", a:"पर्यावरण", t:"emp"},
+    {q:"किस तरह के व्यक्ति अच्छे व्यवहार, उपलब्धियों और नेतृत्व के उदाहरण होते हैं?", a:"Role models", t:"emp"},
+    {q:"There is a coffee shop ___ the park.", a:"next to", t:"emp"},
+    {q:"Rain water harvesting helps to ___ water Scarcity.", a:"Prevent", t:"emp"},
+    {q:"There are many ___ and don'ts to be identified while preparing for attending an interview.", a:"dos", t:"emp"},
+    {q:"Miscommunication से क्या पैदा हो सकती है?", a:"गलतफहमी", t:"emp"},
+    {q:"प्रभावी संचार के लिए क्या आवश्यक है?", a:"ध्यान से सुनना और बात करना", t:"emp"},
+    {q:"Stress (तनाव) क्या है?", a:"हताशा / निराशा की भावना", t:"emp"},
+    {q:"उच्च भावनात्मक बुद्धिमता वाले व्यक्ति के पास क्या होता है?", a:"बहुत सारे सकारात्मक गुण", t:"emp"},
+    {q:"औपचारिक रूप से अपना परिचय देने की प्रक्रिया को क्या कहते हैं?", a:"Self-introduction", t:"emp"},
+    {q:"Resume शब्द फ्रेंच भाषा से आया है, इसका अर्थ है?", a:"संक्षेप (Summary)", t:"emp"},
+    {q:"Biodata में क्या शामिल होता है?", a:"Contact information, education details, Skill और Work experience", t:"emp"},
+    {q:"नौकरी के लिए कवरिंग लेटर कैसे पढ़ना आसान होना चाहिए?", a:"टेक्स्ट को छोटे-छोटे पैराग्राफ में विभाजित कर", t:"emp"},
+    {q:"बायोडाटा तैयार करने के बाद अगला महत्वपूर्ण कदम क्या है?", a:"एक प्रभावशाली कवर लेटर लिखना", t:"emp"},
+    {q:"बायोडाटा की समीक्षा करते समय किस बात का ध्यान रखना जरूरी है?", a:"नौकरी से मेल खाने वाले कौशल और योग्यताओं पर प्रकाश डालना", t:"emp"},
+    {q:"नौकरी के लिए आवेदन करते समय कवरिंग लेटर में महत्वपूर्ण जानकारी क्या होनी चाहिए?", a:"भूमिका के लिए उपयुक्त कारण", t:"emp"},
+    {q:"Formal Communication क्या है?", a:"नियमों के एक सेट के बाद Official Communication", t:"emp"},
+    {q:"नौकरी साक्षात्कार में औपचारिक परिचय कौन सा है?", a:"सुप्रभात, अवसर देने के लिए धन्यवाद", t:"emp"},
+    {q:"Formal Written Communication का उदाहरण क्या है?", a:"अपने प्रबंधक को एक ईमेल लिखना", t:"emp"},
+    {q:"इंटरव्यू के दौरान प्रश्न समझ न आए तो क्या कहेंगे?", a:"क्षमा करें, मुझे समझ नहीं आया, क्या आप प्रश्न दोबारा दोहरा सकते हैं।", t:"emp"},
+    {q:"अच्छा Formal Communication दर्शाने वाली प्रतिक्रिया कौन सी है?", a:"मेरे टॉप तीन कौशल हैं: प्रॉब्लम-सॉल्विंग, टीम वर्क और डिटेल्स पर ध्यान देना।", t:"emp"},
+    {q:"Informal Communication क्या है?", a:"Official work-Arrangement से बाहर Casual Conversation", t:"emp"}
+  ];
+
+  // ============================================================
+  // SET 3 — COMPLETE (Q1 to Q75)
+  // ============================================================
+  const set3 = [
+    {q:"EPS का फुल फॉर्म क्या होता है?", a:"Electric Power Steering", t:"ev"},
+    {q:"इलेक्ट्रिक पावर स्टीयरिंग में प्रयुक्त इलेक्ट्रिक मोटर के नाम पहचान करें?", a:"BLDC मोटर", t:"ev"},
+    {q:"Electric Power Steering की घटक की पहचान करें जो स्टीयरिंग Wheel की स्थिति को मापने के लिए जिम्मेदार है?", a:"टॉर्क सेंसर", t:"ev"},
+    {q:"Electric Power Steering सिस्टम का कौन सा घटक विद्युतिय शक्ति को नियंत्रण शक्ति में परिवर्तित करता है?", a:"Electric Motor", t:"ev"},
+    {q:"Electric Vehicle में Electric Power स्टीयरिंग का निम्नलिखित में से क्या लाभ है?", a:"यह अधिक प्रतिक्रियाशील स्टीयरिंग प्रदान करता है।", t:"ev"},
+    {q:"वाहन Breaking System में EHB का पूर्ण रूप क्या है?", a:"Electro-Hydraulic Brakes", t:"ev"},
+    {q:"Electro-Hydraulic Brakes में Sensors का कार्य क्या है?", a:"यह Breaking बल का पता लगाता है।", t:"ev"},
+    {q:"भारी वाहनों में आम तौर पर इस्तेमाल होने वाले Brake के प्रकार की पहचान करें?", a:"Electro Hydraulic Brakes", t:"ev"},
+    {q:"Electro-Hydraulic Brake कैसे काम करता है?", a:"विद्युत चुम्बकीय बल का उपयोग करके", t:"ev"},
+    {q:"निम्नलिखित में से कौन सा Electro Hydraulic Brake का नुकसान है?", a:"उन्हें एक हाइड्रोलिक सिस्टम की आवश्यकता होती है", t:"ev"},
+    {q:"Braking System में ABS का full form क्या है?", a:"Anti-lock Braking System", t:"ev"},
+    {q:"Anti-lock Braking System में प्रयुक्त Sensor की पहचान करें -", a:"Wheel Speed Sensor", t:"ev"},
+    {q:"Anti-lock Braking System के कार्य क्या है?", a:"Skidding रोकता है।", t:"ev"},
+    {q:"Anti-lock Braking System कैसे काम करता है?", a:"Brake के दबाव को संपादित करके", t:"ev"},
+    {q:"Anti-lock Braking System का संचायक का उद्देश्य क्या है?", a:"To Store Brake Fluid.", t:"ev"},
+    {q:"HVAC का मतलब क्या है?", a:"Heating Ventilation and Air Conditioning", t:"ev"},
+    {q:"Late model Vehicle के Air Conditioning System में इस्तेमाल होने वाले Refrigerant की पहचान करें?", a:"R-1234yf", t:"ev"},
+    {q:"संघनित्र के आउटलेट पर प्रशीतक की स्थिति की पहचान करें?", a:"उच्च दबाव तरल प्रशीतक", t:"ev"},
+    {q:"कार Air Conditioning System में प्रयुक्त ब्लोअर मोटर के लिए वोल्टेज क्या है?", a:"12V dc", t:"ev"},
+    {q:"AC प्रणाली में वाष्पीकरणकर्ता कहाँ स्थित है?", a:"यात्री डिब्बे के अंदर", t:"ev"},
+    {q:"इलेक्ट्रिक वाहन Air-Conditioning System में किस Compressor का उपयोग किया जाता है?", a:"High Voltage Electric inverter Compressor", t:"ev"},
+    {q:"Air-Conditioning System का उच्च दबाव पक्ष कहाँ है?", a:"कंप्रेसर आउटलेट और वाष्पीकरणकर्ता इनलेट के बीच", t:"ev"},
+    {q:"इलेक्ट्रिक Inverter Compressor में VRF का पूर्ण रूप क्या है?", a:"परिवर्तनीय शीतलक प्रवाह", t:"ev"},
+    {q:"Electric Inverter Compressor का क्या कार्य है?", a:"Uses electricity to Compress Refrigerant gases.", t:"ev"},
+    {q:"इलेक्ट्रिक इन्वर्टर कंप्रेसर में किस प्रकार की मोटर का उपयोग किया जाता है?", a:"BLDC - Motor", t:"ev"},
+    {q:"Inverter Compressor पर गति नियंत्रण कैसे प्राप्त करता है?", a:"एक Electronic Inverter का उपयोग करके", t:"ev"},
+    {q:"Electronic वाहन EV में Charging System के घटक क्या है?", a:"AC input, AC/DC Converter, DC/DC Converter Battery", t:"ev"},
+    {q:"Electric वाहन में Charging System कैसे मदद करता है?", a:"Charge the Power Train Battery", t:"ev"},
+    {q:"AC-DC Converter Charging System के घटकों में क्या परिवर्तित करता है?", a:"AC Current into DC Current.", t:"ev"},
+    {q:"यह किस प्रकार की EV Charging है?", a:"Type-3", t:"ev"},
+    {q:"Type-3 किस प्रकार का Charger है?", a:"DC Fast Charge", t:"ev"},
+    {q:"EV से संबंधित किस प्रकार का कनेक्टर Connector विकल्पों में शामिल नहीं?", a:"CB/T", t:"ev"},
+    {q:"MPPT Solar Charger Controller Battery Charge करने के लिए वोल्टेज कहाँ से प्राप्त करता है?", a:"Solar Panel", t:"ev"},
+    {q:"DC-Charging System में AC-Current को DC Current में कैसे बदला जाता है?", a:"Outside the Vehicle assembly", t:"ev"},
+    {q:"कौन-सा मानक इलेक्ट्रिक वाहन प्रगादिय चार्जिंग सिस्टम से संबंधित है?", a:"IEC 61851", t:"ev"},
+    {q:"NEMMP का पूर्ण रूप क्या है?", a:"National Electric Mobility Mission Plan", t:"ev"},
+    {q:"किस वाहन का पारंपरिक विद्युत आउटलेट से सीधा संबंध किसमें वर्णित है?", a:"IEC 61851-1", t:"ev"},
+    {q:"Charging Station का मूल्यांकन किसके द्वारा दिया जाता है?", a:"Kilowatts", t:"ev"},
+    {q:"(a-b)² का सूत्र क्या है?", a:"a² - 2ab + b²", t:"ev"},
+    {q:"कौन-सा प्रतिबल है? [Diagram - Shear]", a:"Shear Stress", t:"ev"},
+    {q:"विकृति की इकाई क्या है?", a:"No Unit", t:"ev"},
+    {q:"प्रतिबल और विकृति के अनुपात को क्या कहते है?", a:"Youngs Modulus", t:"ev"},
+    {q:"पुस्तक का क्या नाम है जिसमें विभिन्न पैसे देशों का संकेत दिया जाता है?", a:"मूल्य सूची", t:"ev"},
+    {q:"Engineering कार्यों में Pocket's Reference का दूसरा शब्द क्या है?", a:"Hand book", t:"ev"},
+    {q:"सर्किट का क्या नाम है? [Diagram - Open circuit with battery and bulb]", a:"खुला सर्किट", t:"ev"},
+    {q:"इस Electronic चिन्ह का क्या नाम है? [Symbol - Diode]", a:"Diode", t:"ev"},
+    {q:"इस Electric चिन्ह का क्या नाम है? [Symbol - Battery]", a:"बैटरी", t:"ev"},
+    {q:"चेतावनी चिन्ह का क्या नाम है? [Symbol - High voltage warning]", a:"बिजली के झटके का खतरा", t:"ev"},
+    {q:"कौन-सा उपकरण AC को DC में उत्पन्न करता है?", a:"Rectifier / Converter", t:"ev"},
+    {q:"एक उपकरण जो वातावरण से नमी को अवशोषित करता है?", a:"Dehumidifier", t:"ev"},
+    {q:"निम्नलिखित में से कौन सी Workplace की भूमिका है?", a:"Informal", t:"emp"},
+    {q:"Workplace पर Informal Communication का क्या लाभ है?", a:"लोगों को एक साथ मिलकर बेहतर ढंग से काम करने में मदद मिलती है।", t:"emp"},
+    {q:"किसी Worker के साथ informal Conversation में क्या पूछना चाहिए?", a:"उनके घर के बारे में पूछना", t:"emp"},
+    {q:"यदि कोई सहकर्मी किसी कार्य के लिए समय सीमा चूक जाता है तो परिणाम क्या होगा?", a:"कार्य में देरी होगी और तनाव बढ़ेगा", t:"emp"},
+    {q:"परिचय पर शिक्षा (निम्नलिखित में से) शामिल नहीं?", a:"अनुचित भाषा और अपमानजनक शब्द", t:"emp"},
+    {q:"निवेशालय में कैसे व्यवहार करना चाहिए?", a:"स्वच्छ पोशाक पहने", t:"emp"},
+    {q:"अच्छी वार्तालाप कौशल से क्या होता है?", a:"कार्यस्थल की साफ-सुथरी रखना", t:"emp"},
+    {q:"किसी official Meeting में निम्नलिखित में से कौन सा आचरण करना चाहिए?", a:"Phone को Silent रखना और Discussion में भाग लेना।", t:"emp"},
+    {q:"यदि सहकर्मी किसी सहकर्मी के बारे में अफवाह फैलाए तो क्या करना चाहिए?", a:"Feel कराना चाहिए कि गॉसिप करना अनुचित व्यवहार है।", t:"emp"},
+    {q:"विद्यालय में कौन-सा सामान्य पाप व दोष है?", a:"एक समान में मिलकर काम करना", t:"emp"},
+    {q:"सबसे कम क्या आवश्यक है?", a:"अपने कर्तव्यबोध", t:"emp"},
+    {q:"टीम के साथ किस पालन पर काम करते समय-सीमा के भीतर लक्ष्य पूरा करने के लिए टीम को क्या करने की जरूरत है?", a:"Idea Share", t:"emp"},
+    {q:"आपकी टीम के पूरा परियोजना समाप्त करने के लिए टीम के लक्ष्य निर्धारित किया है। आपका सदस्य ... पूरा करने - मदद के लिए तैयार नहीं है।", a:"कठिनाइयों में मदद करना - आशा करना", t:"emp"},
+    {q:"पाँच पीढ़ी के कार्यस्थल की विशेषता क्या है?", a:"पुरानी और नई प्रौद्योगिकी का संगम", t:"emp"},
+    {q:"क्या पुराने तरीके से काम करना चाहिए?", a:"दूसरा अवसर देना चाहिए", t:"emp"},
+    {q:"आप किस तरह से अपनी Technology Skill में सुधार कर सकते हैं?", a:"Social Media, Online Digital Tools", t:"emp"},
+    {q:"नई जानकारी का कोई एक छोटा Past-time रूप से क्या काम करते हैं?", a:"नई जानकारी सीखना", t:"emp"},
+    {q:"नई मानव के लिए ... की खोज के लिए एक शानदार तरीका है।", a:"Online Platforms and Apps", t:"emp"},
+    {q:"विनम्रता में कौन-सा एक - रोजगार योग्यता है।", a:"सभी विकल्प", t:"emp"},
+    {q:"काम में व्यवहारिकता का अर्थ है?", a:"अपनी त्रुटि के लिए दूसरों को दोष न देना", t:"emp"},
+    {q:"प्रकाश के लिए पृथ्वी की ... का महत्व?", a:"जीवन पालन की क्षमता", t:"emp"},
+    {q:"Skill India Digital - क्या है?", a:"Skill और कैरियर संसाधन के लिए एक मंच", t:"emp"},
+    {q:"एक Digital CV बनाना और उसे QR Code के साथ साझा करना - क्या है?", a:"अपनी डिजिटल पहचान", t:"emp"},
+    {q:"जब कार्य को पूरा करने से पहले बर्बाद और प्लानिंग की अभ्यास करता है।", a:"Green Mindset", t:"emp"},
+    {q:"Green Mindset के लिए अच्छा अभ्यास क्या है?", a:"करने की क्षमता को अलग से और उसको पुनर्मूल्यांकन करे।", t:"emp"}
+  ];
+
+  // ======================== ALL SETS ========================
+  const allSets = {
+    set1: { name: "Set 1", mcqs: set1 },
+    set2: { name: "Set 2", mcqs: set2 },
+    set3: { name: "Set 3", mcqs: set3 }
+  };
+
+  let currentSet = 'set1';
+  const contentDiv = document.getElementById('content');
+  const searchInput = document.getElementById('search');
+
+  // set selector
+  function selectSet(setKey) {
+    currentSet = setKey;
+    document.querySelectorAll('.set-btn').forEach(b => b.classList.remove('active'));
+    const btn = document.getElementById('setBtn' + setKey.replace('set', ''));
+    if (btn) btn.classList.add('active');
+    searchInput.value = '';
+    render();
+  }
+
+  // RENDER — with hidden answer + click reveal
+  function render() {
+    const search = searchInput.value.toLowerCase().trim();
+    contentDiv.innerHTML = '';
+
+    const setData = allSets[currentSet];
+    if (!setData) {
+      contentDiv.innerHTML = '<div class="no-results">😕 Set नहीं मिला।</div>';
+      return;
+    }
+
+    const mcqs = setData.mcqs;
+
+    // EV
+    const evQs = mcqs.filter(q => q.t === 'ev' &&
+      (q.q.toLowerCase().includes(search) || q.a.toLowerCase().includes(search)));
+
+    if (evQs.length > 0) {
+      const title = document.createElement('div');
+      title.className = 'section-title ev';
+      title.innerHTML = `⚡ ${setData.name} — EV MCQs (${evQs.length})`;
+      contentDiv.appendChild(title);
+
+      evQs.forEach(item => {
+        const idx = mcqs.indexOf(item) + 1;
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.setAttribute('data-answer', item.a);
+        card.innerHTML = `
+          <div class="q-num">Q${idx}</div>
+          <div class="question">${item.q} <span class="hint">👆 tap to reveal</span></div>
+          <div class="answer">✅ ${item.a}</div>
+        `;
+        card.addEventListener('click', function(e) {
+          // toggle reveal
+          this.classList.toggle('revealed');
+        });
+        contentDiv.appendChild(card);
+      });
+    }
+
+    // EMP
+    const empQs = mcqs.filter(q => q.t === 'emp' &&
+      (q.q.toLowerCase().includes(search) || q.a.toLowerCase().includes(search)));
+
+    if (empQs.length > 0) {
+      const title = document.createElement('div');
+      title.className = 'section-title emp';
+      title.innerHTML = `💼 ${setData.name} — Employability MCQs (${empQs.length})`;
+      contentDiv.appendChild(title);
+
+      empQs.forEach(item => {
+        const idx = mcqs.indexOf(item) + 1;
+        const card = document.createElement('div');
+        card.className = 'card emp-card';
+        card.setAttribute('data-answer', item.a);
+        card.innerHTML = `
+          <div class="q-num">Q${idx}</div>
+          <div class="question">${item.q} <span class="hint">👆 tap to reveal</span></div>
+          <div class="answer">✅ ${item.a}</div>
+        `;
+        card.addEventListener('click', function() {
+          this.classList.toggle('revealed');
+        });
+        contentDiv.appendChild(card);
+      });
+    }
+
+    if (evQs.length === 0 && empQs.length === 0) {
+      contentDiv.innerHTML = '<div class="no-results">😕 कोई परिणाम नहीं मिला। खोज बदलें।</div>';
+    }
+  }
+
+  // search event
+  searchInput.addEventListener('input', render);
+
+  // initial
+  selectSet('set1');
+</script>
+</body>
+</html>
